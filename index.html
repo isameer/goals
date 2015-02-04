@@ -4,30 +4,50 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Goals</title>
-  <!--<link rel="stylesheet" href="assets/base.css">-->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" href="css/jquery.gridster.min.css" />
+  <link rel="stylesheet" href="css/base.css" />
   <script type="text/template" id="goal-template">
-  <li>
-  <label><%= title %></label>
-  <p><%= description %></p>
-  </li>
+  <h2><%= title %></h2>
+  <h3><%= description %></h3>
+  <p>
+	  <%= clockTimeHours/24 %> days
+  </p>
   </script>
   <script src="js/lib/jquery-2.1.3.min.js"></script>
+  <script src="js/lib/jquery.gridster.min.js"></script>
   <script src="http://www.parsecdn.com/js/parse-1.3.4.min.js"></script>
   <script src="js/lib/underscore-1.7.1.min.js"></script>
   <script src="js/models/goal.js"></script>
   <script src="js/views/goal.js"></script>
   <script src="js/views/goals.js"></script>
   <script type='text/javascript'>
+
   $(document).ready(function() {
-  Parse.initialize("6poep0xjbGEr0RC6GCWylnBFLAHmumlGZg2OIBHo", "IrKiXiP8XIXFBt7eVqWPFIEq5XvIOCVHVJeqjFxp");
-  var testGoal1 = new Goal({title: 'Learn Spanish', description: 'Coffee Break Spanish!'});
-  var testGoal2 = new Goal({title: 'John Langford\'s Talks', description: 'VW and everything else'});
-  var testGoalList = [testGoal1, testGoal2];
-  var goalsView = new GoalsView({collection: testGoalList});
-  $(document.body).append(goalsView.render().el);
+	  Parse.initialize("6poep0xjbGEr0RC6GCWylnBFLAHmumlGZg2OIBHo", "IrKiXiP8XIXFBt7eVqWPFIEq5XvIOCVHVJeqjFxp");
+
+//  var testGoal1 = new Goal({title: 'Theoretical Minimum', description: 'Book, videos and problems', priority: 1, userTimeHours: 60, clockTimeHours: 24*30});
+  //testGoal1.save();
+  var query = new Parse.Query(Goal);
+  query.find({
+	success: function(results) {
+		console.log("Successfully retrieved " + results.length + " objects.");
+		var goalsView = new GoalsView({collection: results});
+		$('#goals').append(goalsView.render().el);
+		$(".gridster ul").gridster({
+			widget_margins: [10, 10],
+			widget_base_dimensions: [140, 140],
+		});
+	},
+	error: function(error) {
+		console.error("Error: " + error.code + " " + error.message);
+	}
+});
   });
 </script>
 </head>
 <body>
+<div class="gridster" id = 'goals'>
+</div>
 </body>
 </html>

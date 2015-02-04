@@ -1,0 +1,26 @@
+.gridster ul li {
+	cursor: pointer;
+	text-align:center;
+}
+
+.gridster ul {
+	list-style-type:none;
+}
+
+body {
+	background-color:#222;
+	color: white;
+	font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+h3 {
+	font-size: 25px;
+	font-weight: 600;
+}
+
+h1 { 
+	font-size: 30px;
+	font-weight: 400;
+	margin-bottom: 12px;
+	text-align: center;
+}

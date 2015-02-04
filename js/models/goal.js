@@ -7,5 +7,8 @@ var Goal = Parse.Object.extend('Goal', {
 		primaryMetric: null,
 		secondaryMetrics: [],
 		owner: null,
+		userTimeHours: 1,
+		clockTimeHours: 1,
+		priority: 1,
 	},
 });
